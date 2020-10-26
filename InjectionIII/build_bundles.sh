@@ -6,7 +6,7 @@
 #  Created by John Holdsworth on 04/10/2019.
 #  Copyright © 2019 John Holdsworth. All rights reserved.
 #
-#  $Id: //depot/ResidentEval/InjectionIII/build_bundles.sh#46 $
+#  $Id: //depot/ResidentEval/InjectionIII/build_bundles.sh#50 $
 #
 
 # Injection has to assume a fixed path for Xcode.app as it uses
@@ -28,10 +28,6 @@ function build_bundle () {
     "$DEVELOPER_BIN_DIR"/xcodebuild SYMROOT=$SYMROOT ARCHS="$ARCHS" PRODUCT_NAME="${FAMILY}Injection" LD_RUNPATH_SEARCH_PATHS="$SWIFT_DYLIBS_PATH $XCTEST_FRAMEWORK_PATH @loader_path/Frameworks" -sdk $SDK -config $CONFIGURATION -target InjectionBundle &&
     "$DEVELOPER_BIN_DIR"/xcodebuild SYMROOT=$SYMROOT ARCHS="$ARCHS" -sdk $SDK -config $CONFIGURATION -target SwiftUISupport
 }
-
-if [ -w "$SRCROOT/SwiftTrace/SwiftTraceGuts/SwiftTrace-Swift.h" ]; then
-    rsync -au "$BUILT_PRODUCTS_DIR/SwiftTrace.framework/Versions/A/Headers/SwiftTrace-Swift.h" "$SRCROOT/SwiftTrace/SwiftTraceGuts"
-fi &&
 
 #build_bundle macOS MacOSX macosx &&
 build_bundle iOS iPhoneSimulator iphonesimulator &&
